@@ -3,45 +3,64 @@
 <head>
     <title>Kolokwium</title>
     <script src="https://unpkg.com/vue"></script>
-    <style>
-        .cell{
+	<style>
+        .cell {
+            height: 50px;
+            width: 50px;
+            background: orange;
+            border: 1px solid gray;
+            border-radius: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+		.cell p {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 50px;
-            width: 50px;
-            background-color: orange;
-            border: 1px solid grey;
-            border-radius: 10px;
-            margin-top: 10px;
-            margin-right: 10px;
+        } 
+		.kwadracik{
+            display: flex;
+            flex-direction: row;
+        }
+		.active {
+            background: red;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <div class="cell">
-1
-        </div>
     {{ message }}
-    <div v-for="i in rows" style="display: flex; content: wrap;">
-        <div v-for="j in columns" style="display: flex; content: wrap;">
-            <div class="cell">
-                {{i}},{{j}}
+	<div class="kwadracik" v-for="r in rows">
+		<div class="cell" v-for="c in columns" 
+		:class="[sp1(active) === r.toString() && sp2(active) === c.toString() ? 'active' : 'cell']">
+                <p>{{ r }},{{ c }}</p>
             </div>
-        </div>
-    </div>
-    </div>
+		</div>
+	</div>
 
     <script>
     var app = new Vue({
         el: '#app',
         data: {
             message: 'Powodzenia',
-            rows: 10,
-            columns: 10
-        }
+			rows: 10, 
+            columns: 10,
+			active: '1,1'
+        },
+		
+		methods: {
+		sp1: function(x){
+				console.log(x.split(',')[0])
+                return x.split(',')[0]
+            },
+			sp2: function(x){
+				console.log(x.split(',')[0])
+                return x.split(',')[1]
+            }
+		}
     })
     </script>
 </body>
 </html>
+© 2021 GitHub, Inc.
